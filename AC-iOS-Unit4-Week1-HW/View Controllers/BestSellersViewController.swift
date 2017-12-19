@@ -9,34 +9,37 @@
 import UIKit
 
 class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-
-    
-  
-    
     
     //Outlets
     @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     //Variables
     var categories = [Category]() {
         didSet {
             pickerView.reloadAllComponents()
+            
         }
     }
     
-    var bestSellers = [BestSellersWrapper]() //{
-//        didSet {
-//
-//        }
-//    }
+    var bestSellers = [BestSellersWrapper]() {
+        didSet {
+            
+            collectionView.reloadData()
+        }
+    }
     
     //View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.reloadData()
         loadCategories()
-        loadBestSellers()
+        
+        
     }
     
     
@@ -70,8 +73,8 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
         }
         
         NYTBookAPIClient.manager.getNYTBookInfo(from: urlStr,
-                                            completionHandler: completion,
-                                            errorHandler: errorHanlder)
+                                                completionHandler: completion,
+                                                errorHandler: errorHanlder)
         
     }
     
@@ -135,10 +138,42 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        SelectedCategory.manager.selectedCategory = categories[row].display_name
+        SelectedCategory.manager.selectedCategory = categories[row].list_name_encoded
         UserDefaultHelper.manager.setCategory(to: SelectedCategory.manager.selectedCategory)
         print(SelectedCategory.manager.selectedCategory)
+        loadBestSellers()
     }
-  
+    
     
 }
+
+
+
+
+extension BestSellersViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    
+    //Num of Sections
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(bestSellers.count)
+        return bestSellers.count
+    }
+    
+    //Cells
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestSellersCell", for: indexPath)
+        let aBook = bestSellers[indexPath.row]
+        if let cell = cell as? BestSellerCollectionViewCell {
+            cell.bestSellerDetailedText.text = aBook.book_details[0].bestSellerDetail
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+    
+    
+}
+
+
+
+
+

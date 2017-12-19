@@ -23,5 +23,6 @@ public struct SelectedCategory {
     
     static var manager = SelectedCategory()
     private init() {}
-public var selectedCategory = ""
+    public var selectedCategory = ""
+    
 }

@@ -18,18 +18,24 @@ struct BestSellers: Codable {
 
 struct BestSellersWrapper: Codable {
     let weeks_on_list: Int
-    let book_details: BookInfoWrapper
-    let isbns: ISBNWrapper
+    let book_details: [BookInfoWrapper]
+    let isbns: [ISBNWrapper]
 }
 
 struct BookInfoWrapper: Codable {
-    let description: String
+    let bestSellerDetail: String
+    
+    enum CodingKeys: String, CodingKey {
+        case bestSellerDetail = "description"
+    }
 }
 
 struct ISBNWrapper: Codable {
     let isbn10: String
     let isbn13: String
 }
+
+
 
 //Description
 //Image
