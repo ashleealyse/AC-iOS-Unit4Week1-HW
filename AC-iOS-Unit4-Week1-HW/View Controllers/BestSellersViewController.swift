@@ -176,8 +176,8 @@ extension BestSellersViewController: UICollectionViewDelegate, UICollectionViewD
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? DetailedBookViewController {
-            let selectedBook = bestSellers[indexPa]
-            destination.bestSellers = selectedBook
+//            let selectedBook = bestSellers[indexPa]
+//            destination.bestSellers = selectedBook
         }
     }
 

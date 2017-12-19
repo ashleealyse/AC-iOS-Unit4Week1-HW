@@ -45,7 +45,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_book_cover" translatesAutoresizingMaskIntoConstraints="NO" id="Kvx-kF-4gM">
-                                                    <rect key="frame" x="0.0" y="-6" width="320" height="143"/>
+                                                    <rect key="frame" x="0.0" y="9" width="320" height="128"/>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="psR-tA-JRm">
                                                     <rect key="frame" x="0.0" y="138" width="320" height="90"/>
@@ -58,12 +58,12 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="psR-tA-JRm" firstAttribute="top" secondItem="Kvx-kF-4gM" secondAttribute="bottom" constant="1" id="A4w-Z7-Y8h"/>
-                                            <constraint firstItem="Kvx-kF-4gM" firstAttribute="top" secondItem="ykE-aK-sw2" secondAttribute="topMargin" constant="-14" id="K4Q-jC-HtK"/>
+                                            <constraint firstItem="Kvx-kF-4gM" firstAttribute="top" secondItem="ykE-aK-sw2" secondAttribute="topMargin" constant="1" id="K4Q-jC-HtK"/>
                                             <constraint firstItem="psR-tA-JRm" firstAttribute="leading" secondItem="ykE-aK-sw2" secondAttribute="leading" id="R4G-x6-Vwl"/>
                                             <constraint firstAttribute="bottom" secondItem="psR-tA-JRm" secondAttribute="bottom" id="SeV-mw-DIJ"/>
                                             <constraint firstAttribute="trailing" secondItem="psR-tA-JRm" secondAttribute="trailing" id="gB7-aa-VCk"/>
                                             <constraint firstItem="Kvx-kF-4gM" firstAttribute="width" secondItem="ykE-aK-sw2" secondAttribute="width" id="iKk-wo-SjI"/>
-                                            <constraint firstItem="Kvx-kF-4gM" firstAttribute="height" secondItem="ykE-aK-sw2" secondAttribute="height" multiplier="0.5" constant="29" id="nhX-TE-ybh"/>
+                                            <constraint firstItem="Kvx-kF-4gM" firstAttribute="height" secondItem="ykE-aK-sw2" secondAttribute="height" multiplier="0.5" constant="14" id="nhX-TE-ybh"/>
                                             <constraint firstItem="Kvx-kF-4gM" firstAttribute="centerX" secondItem="ykE-aK-sw2" secondAttribute="centerX" id="pKy-LH-g6F"/>
                                         </constraints>
                                         <connections>

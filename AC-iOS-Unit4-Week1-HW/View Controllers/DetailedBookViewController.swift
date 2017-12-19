@@ -31,9 +31,9 @@ class DetailedBookViewController: UIViewController {
         
         
         
-        textBox =
-        """
-        \(bestSeller.)
-        """
+//        textBox =
+//        """
+//        \(bestSeller.)
+//        """
     }
 }
