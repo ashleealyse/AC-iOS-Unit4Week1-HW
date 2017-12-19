@@ -26,3 +26,5 @@ public struct SelectedCategory {
     public var selectedCategory = ""
     
 }
+
+

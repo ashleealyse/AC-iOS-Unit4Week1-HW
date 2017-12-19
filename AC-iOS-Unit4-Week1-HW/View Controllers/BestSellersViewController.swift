@@ -45,6 +45,7 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
     }
     
     
+    
     func loadBestSellers(){
         let urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=e0dad52307ed4af4bf70869d3be66558&list=\(SelectedCategory.manager.selectedCategory)"
         
@@ -171,6 +172,15 @@ extension BestSellersViewController: UICollectionViewDelegate, UICollectionViewD
         }
         return UICollectionViewCell()
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? DetailedBookViewController {
+            let selectedBook = bestSellers[indexPa]
+            destination.bestSellers = selectedBook
+        }
+    }
+
     
     
 }

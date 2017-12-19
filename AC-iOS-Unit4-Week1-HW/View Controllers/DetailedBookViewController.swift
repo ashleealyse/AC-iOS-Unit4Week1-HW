@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailedBookViewController: UIViewController {
-
+    
     //Outlets
     @IBOutlet weak var detailedBookImage: UIImageView!
     @IBOutlet weak var detailedBookText: UITextView!
@@ -19,9 +19,21 @@ class DetailedBookViewController: UIViewController {
     
     
     //Variables
+    var bestSeller: BestSellersWrapper!
+    var textBox = ""
     
     //View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func loadDetailedBook() {
+        
+        
+        
+        textBox =
+        """
+        \(bestSeller.)
+        """
     }
 }
