@@ -15,6 +15,8 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
     @IBOutlet weak var collectionView: UICollectionView!
     
     //Variables
+    var cellSpacing = UIScreen.main.bounds.size.width * 0.05
+    
     var categories = [Category]() {
         didSet {
             pickerView.reloadAllComponents()
@@ -173,6 +175,32 @@ extension BestSellersViewController: UICollectionViewDelegate, UICollectionViewD
     
 }
 
+extension BestSellersViewController: UICollectionViewDelegateFlowLayout {
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let numCells: CGFloat = 1
+        let numSpaces: CGFloat = numCells
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
+        
+        return CGSize(width: (screenWidth - (cellSpacing * numSpaces)) / numCells, height: screenHeight * 0.50)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: cellSpacing, left: cellSpacing, bottom: cellSpacing, right: cellSpacing)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return cellSpacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return cellSpacing
+    }
+}
 
 
 
