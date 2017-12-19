@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
         loadCategories()
+    
     }
     
 //    override func viewWillDisappear(_ animated: Bool) {
@@ -91,10 +92,14 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         return categories[row].display_name
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        SelectedCategory.manager.selectedCategory = categories[row].display_name
+        UserDefaultHelper.manager.setCategory(to: SelectedCategory.manager.selectedCategory)
+        print(SelectedCategory.manager.selectedCategory)
+    }
+    
+    
 
-    
-    
-    
     
     
 }

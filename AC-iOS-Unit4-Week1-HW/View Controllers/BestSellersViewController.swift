@@ -36,6 +36,7 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
         loadCategories()
+        loadBestSellers()
     }
     
     
@@ -134,8 +135,10 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        SelectedCategory.manager.selectedCategory = categories[0].display_name
+        SelectedCategory.manager.selectedCategory = categories[row].display_name
         UserDefaultHelper.manager.setCategory(to: SelectedCategory.manager.selectedCategory)
+        print(SelectedCategory.manager.selectedCategory)
     }
+  
     
 }
