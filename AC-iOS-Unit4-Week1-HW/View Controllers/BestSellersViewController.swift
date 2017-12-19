@@ -8,17 +8,134 @@
 
 import UIKit
 
-class BestSellersViewController: UIViewController {
+class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    
+  
+    
+    
     //Outlets
     @IBOutlet weak var pickerView: UIPickerView!
     
     //Variables
+    var categories = [Category]() {
+        didSet {
+            pickerView.reloadAllComponents()
+        }
+    }
+    
+    var bestSellers = [BestSellersWrapper]() //{
+//        didSet {
+//
+//        }
+//    }
     
     //View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.pickerView.delegate = self
+        self.pickerView.dataSource = self
+        loadCategories()
     }
     
+    
+    func loadBestSellers(){
+        let urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=e0dad52307ed4af4bf70869d3be66558&list=\(SelectedCategory.manager.selectedCategory)"
+        
+        let completion = {(onlineBestSellers: [BestSellersWrapper]) in
+            self.bestSellers = onlineBestSellers
+        }
+        
+        
+        let errorHanlder: (AppError) -> Void = {(error: AppError) in
+            switch error{
+            case .noInternetConnection:
+                print("No internet connection")
+            case .couldNotParseJSON:
+                print("Could Not Parse")
+            case .badStatusCode:
+                print("Bad Status Code")
+            case .badURL:
+                print("Bad URL")
+            case .invalidJSONResponse:
+                print("Invalid JSON Response")
+            case .noDataReceived:
+                print("No Data Received")
+            case .notAnImage:
+                print("No Image Found")
+            default:
+                print("Other error")
+            }
+        }
+        
+        NYTBookAPIClient.manager.getNYTBookInfo(from: urlStr,
+                                            completionHandler: completion,
+                                            errorHandler: errorHanlder)
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func loadCategories(){
+        
+        let urlStr = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=e0dad52307ed4af4bf70869d3be66558"
+        
+        let completion = {(onlineCategories: [Category]) in
+            self.categories = onlineCategories
+        }
+        
+        
+        let errorHanlder: (AppError) -> Void = {(error: AppError) in
+            switch error{
+            case .noInternetConnection:
+                print("No internet connection")
+            case .couldNotParseJSON:
+                print("Could Not Parse")
+            case .badStatusCode:
+                print("Bad Status Code")
+            case .badURL:
+                print("Bad URL")
+            case .invalidJSONResponse:
+                print("Invalid JSON Response")
+            case .noDataReceived:
+                print("No Data Received")
+            case .notAnImage:
+                print("No Image Found")
+            default:
+                print("Other error")
+            }
+        }
+        
+        NYTAPIClient.manager.getNYTBookInfo(from: urlStr,
+                                            completionHandler: completion,
+                                            errorHandler: errorHanlder)
+    }
+    
+    //Picker View Data Source Requirements
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categories.count
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return categories[row].display_name
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        SelectedCategory.manager.selectedCategory = categories[0].display_name
+        UserDefaultHelper.manager.setCategory(to: SelectedCategory.manager.selectedCategory)
+    }
     
 }

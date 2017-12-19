@@ -26,6 +26,8 @@
 		93D69FD61FE8615E00C73A87 /* BestSellers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D69FD51FE8615E00C73A87 /* BestSellers.swift */; };
 		93D69FD81FE8616500C73A87 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D69FD71FE8616500C73A87 /* Categories.swift */; };
 		93D69FDA1FE8617000C73A87 /* GoogleBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D69FD91FE8617000C73A87 /* GoogleBook.swift */; };
+		93D69FDD1FE8869D00C73A87 /* NYTBookAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D69FDC1FE8869D00C73A87 /* NYTBookAPIClient.swift */; };
+		93D69FDF1FE8913600C73A87 /* UserDefaultHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D69FDE1FE8913600C73A87 /* UserDefaultHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		93D69FD51FE8615E00C73A87 /* BestSellers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellers.swift; sourceTree = "<group>"; };
 		93D69FD71FE8616500C73A87 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		93D69FD91FE8617000C73A87 /* GoogleBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBook.swift; sourceTree = "<group>"; };
+		93D69FDC1FE8869D00C73A87 /* NYTBookAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTBookAPIClient.swift; sourceTree = "<group>"; };
+		93D69FDE1FE8913600C73A87 /* UserDefaultHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,8 @@
 				93D69FC61FE8609700C73A87 /* NetworkHelper.swift */,
 				93D69FC81FE860A600C73A87 /* ImageAPIClient.swift */,
 				93D69FCA1FE860BF00C73A87 /* NYTAPIClient.swift */,
+				93D69FDE1FE8913600C73A87 /* UserDefaultHelper.swift */,
+				93D69FDC1FE8869D00C73A87 /* NYTBookAPIClient.swift */,
 				93D69FCC1FE860CB00C73A87 /* GoogleAPIClient.swift */,
 				93D69FCE1FE860D400C73A87 /* AppError.swift */,
 			);
@@ -223,10 +229,12 @@
 				93D69FC71FE8609700C73A87 /* NetworkHelper.swift in Sources */,
 				93D69FCB1FE860BF00C73A87 /* NYTAPIClient.swift in Sources */,
 				93D69FC51FE85F0900C73A87 /* BestSellerCollectionViewCell.swift in Sources */,
+				93D69FDD1FE8869D00C73A87 /* NYTBookAPIClient.swift in Sources */,
 				93D69FC01FE8510400C73A87 /* DetailedBookViewController.swift in Sources */,
 				93D69FB91FE8507F00C73A87 /* FavoritesViewController.swift in Sources */,
 				93D69FC21FE859E400C73A87 /* FavoritesCollectionViewCell.swift in Sources */,
 				93D69FBD1FE850B400C73A87 /* BestSellersViewController.swift in Sources */,
+				93D69FDF1FE8913600C73A87 /* UserDefaultHelper.swift in Sources */,
 				93D69FDA1FE8617000C73A87 /* GoogleBook.swift in Sources */,
 				93D69FCF1FE860D400C73A87 /* AppError.swift in Sources */,
 				93D69FC91FE860A600C73A87 /* ImageAPIClient.swift in Sources */,

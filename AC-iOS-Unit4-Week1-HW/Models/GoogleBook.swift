@@ -16,14 +16,14 @@ import Foundation
 
 
 struct GoogleBook: Codable {
-    let items: ItemWrapper
+    let items: BookWrapper
 }
 
-struct ItemWrapper: Codable {
-    let volumeInfo: VolumeInfoWrapper
+struct BookWrapper: Codable {
+    let volumeInfo: BookDetails
 }
 
-struct VolumeInfoWrapper: Codable {
+struct BookDetails: Codable {
     let title: String
     let subtitle: String?
 //    let authors: [String]

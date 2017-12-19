@@ -15,7 +15,7 @@ import Foundation
 struct NYTAPIClient{
     private init() {}
     static let manager = NYTAPIClient()
-    func getGoogleInfo(from urlStr: String, completionHandler: @escaping (Data) -> Void, errorHandler: @escaping (AppError) -> Void){
+    func getNYTBookInfo(from urlStr: String, completionHandler: @escaping ([Category]) -> Void, errorHandler: @escaping (AppError) -> Void){
         
         
         guard let url = URL(string: urlStr) else{
@@ -28,11 +28,12 @@ struct NYTAPIClient{
             do{
                 let myDecoder = JSONDecoder()
                 
-                //let elements = try myDecoder.decode([Element].self, from: data)
-                //completionHandler(elements)
+                let categories = try myDecoder.decode(BestSellersCategory.self, from: data)
+               completionHandler(categories.results)
+               
                 
             } catch{
-                print("Elements Table Has This Error: " + error.localizedDescription)
+                print("Category in NYTAPIClient Has This Error: " + error.localizedDescription)
                 errorHandler(.couldNotParseJSON)
                 
             }
