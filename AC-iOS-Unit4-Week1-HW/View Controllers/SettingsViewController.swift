@@ -93,10 +93,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        SelectedCategory.manager.selectedCategory = categories[row].list_name_encoded
-        UserDefaultHelper.manager.setCategory(to: SelectedCategory.manager.selectedCategory)
-        
-        print(SelectedCategory.manager.selectedCategory)
+
+        UserDefaultHelper.manager.setCategory(to: row)
         
     }
     

@@ -19,12 +19,5 @@ struct Category: Codable {
     let list_name_encoded: String
 }
 
-public struct SelectedCategory {
-    
-    static var manager = SelectedCategory()
-    private init() {}
-    public var selectedCategory = ""
-    
-}
 
 

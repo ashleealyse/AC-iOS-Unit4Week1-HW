@@ -21,6 +21,11 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
         didSet {
             pickerView.reloadAllComponents()
             
+            if UserDefaultHelper.manager.getCategory() != nil {
+                pickerView.selectRow(UserDefaultHelper.manager.getCategory()!, inComponent: 0, animated: false)
+            } else {
+                pickerView.selectRow(0, inComponent: 0, animated: false)
+            }
         }
     }
     
@@ -46,8 +51,8 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     
     
-    func loadBestSellers(){
-        let urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=e0dad52307ed4af4bf70869d3be66558&list=\(SelectedCategory.manager.selectedCategory)"
+    func loadBestSellers(categoryStr: String){
+        let urlStr = "https://api.nytimes.com/svc/books/v3/lists.json?api-key=e0dad52307ed4af4bf70869d3be66558&list=\(categoryStr)"
         
         let completion = {(onlineBestSellers: [BestSellersWrapper]) in
             self.bestSellers = onlineBestSellers
@@ -83,7 +88,18 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        if UserDefaultHelper.manager.getCategory() != nil {
+            self.pickerView.selectRow(UserDefaultHelper.manager.getCategory()!, inComponent: 0, animated: false)
+            
+            if categories.isEmpty {
+                return
+                
+            } else {
+                loadBestSellers(categoryStr: categories[UserDefaultHelper.manager.getCategory()!].list_name_encoded)
+            }
+        }
+    }
     
     
     
@@ -96,6 +112,11 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
         
         let completion = {(onlineCategories: [Category]) in
             self.categories = onlineCategories
+            if UserDefaultHelper.manager.getCategory() != nil {
+                self.loadBestSellers(categoryStr: self.categories[UserDefaultHelper.manager.getCategory()!].list_name_encoded)
+            } else {
+                self.loadBestSellers(categoryStr: self.categories[0].list_name_encoded)
+            }
         }
         
         
@@ -141,10 +162,8 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        SelectedCategory.manager.selectedCategory = categories[row].list_name_encoded
-        UserDefaultHelper.manager.setCategory(to: SelectedCategory.manager.selectedCategory)
-        print(SelectedCategory.manager.selectedCategory)
-        loadBestSellers()
+  
+       loadBestSellers(categoryStr: categories[row].list_name_encoded)
     }
     
     

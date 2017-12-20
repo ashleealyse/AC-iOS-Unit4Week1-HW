@@ -12,10 +12,10 @@ struct UserDefaultHelper {
     static let manager = UserDefaultHelper()
     private init() {}
     let categoryKey = "CategoryKey"
-    func getCategory() -> String? {
-        return UserDefaults.standard.string(forKey: categoryKey)
+    func getCategory() -> Int? {
+        return UserDefaults.standard.integer(forKey: categoryKey)
     }
-    func setCategory(to thisCategory: String) {
+    func setCategory(to thisCategory: Int) {
         UserDefaults.standard.setValue(thisCategory, forKey: categoryKey)
     }
 
