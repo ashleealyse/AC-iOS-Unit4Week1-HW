@@ -15,7 +15,7 @@ import Foundation
 struct GoogleAPIClient{
     private init() {}
     static let manager = GoogleAPIClient()
-    func getGoogleInfo(from urlStr: String, completionHandler: @escaping (Data) -> Void, errorHandler: @escaping (AppError) -> Void){
+    func getGoogleInfo(from urlStr: String, completionHandler: @escaping ([BookWrapper]) -> Void, errorHandler: @escaping (AppError) -> Void){
         
         
         guard let url = URL(string: urlStr) else{
@@ -28,11 +28,12 @@ struct GoogleAPIClient{
             do{
                 let myDecoder = JSONDecoder()
                 
-                //let elements = try myDecoder.decode([Element].self, from: data)
-                //completionHandler(elements)
+                let bookInfo = try myDecoder.decode(GoogleBook.self, from: data)
+                completionHandler(bookInfo.items)
+
                 
             } catch{
-                print("Elements Table Has This Error: " + error.localizedDescription)
+                print("Google Book API Has This Error: " + error.localizedDescription)
                 errorHandler(.couldNotParseJSON)
                 
             }

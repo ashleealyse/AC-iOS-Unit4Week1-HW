@@ -17,6 +17,17 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
     //Variables
     var cellSpacing = UIScreen.main.bounds.size.width * 0.05
     
+    
+    
+    var books = [BookWrapper?]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    
     var categories = [Category]() {
         didSet {
             pickerView.reloadAllComponents()
@@ -48,6 +59,62 @@ class BestSellersViewController: UIViewController, UIPickerViewDataSource, UIPic
         
         
     }
+    
+    
+    func loadBooks(book bestSeller: BestSellersWrapper, cell currentCell: BestSellerCollectionViewCell) {
+        
+        let isbn = bestSeller.isbns[0].isbn13
+        
+        let urlStr = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)&key=AIzaSyDc1ntgB2XOz9dCfAwf0QMmlWitRWFHhAo"
+        
+        let completion: ([BookWrapper]) -> Void = {(onlineGoogleBook: [BookWrapper]) in
+            if let imageUrl = onlineGoogleBook[0].volumeInfo.imageLinks?.thumbnail {
+                
+                let completion: (UIImage) -> Void = {(onlineImage: UIImage) in
+                    
+                    currentCell.bestSellerBookImage.image = onlineImage
+                    currentCell.setNeedsLayout()
+                    
+                }
+                
+                ImageAPIClient.manager.getImage(from: imageUrl, completionHandler: completion, errorHandler: {print($0)})
+                
+            } else {
+                
+                currentCell.bestSellerBookImage.image = #imageLiteral(resourceName: "no_book_cover")
+                currentCell.setNeedsLayout()
+                
+            }
+            self.books.append(onlineGoogleBook[0])
+        }
+        
+        let errorHanlder: (AppError) -> Void = {(error: AppError) in
+            switch error{
+            case .noInternetConnection:
+                print("No internet connection")
+            case .couldNotParseJSON:
+                print("Could Not Parse")
+            case .badStatusCode:
+                print("Bad Status Code")
+            case .badURL:
+                print("Bad URL")
+            case .invalidJSONResponse:
+                print("Invalid JSON Response")
+            case .noDataReceived:
+                print("No Data Received")
+            case .notAnImage:
+                print("No Image Found")
+            default:
+                print("Other error")
+            }
+        }
+        
+        GoogleAPIClient.manager.getGoogleInfo(from: urlStr, completionHandler: completion, errorHandler: errorHanlder)
+        
+    }
+    
+    
+    
     
     
     
@@ -187,6 +254,7 @@ extension BestSellersViewController: UICollectionViewDelegate, UICollectionViewD
         let aBook = bestSellers[indexPath.row]
         if let cell = cell as? BestSellerCollectionViewCell {
             cell.bestSellerDetailedText.text = aBook.book_details[0].bestSellerDetail
+            loadBooks(book: aBook, cell: cell)
             return cell
         }
         return UICollectionViewCell()
